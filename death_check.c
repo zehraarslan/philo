@@ -6,7 +6,7 @@
 /*   By: zarslan <zarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 16:16:12 by zarslan           #+#    #+#             */
-/*   Updated: 2022/09/21 18:01:22 by zarslan          ###   ########.fr       */
+/*   Updated: 2022/10/11 15:08:13 by zarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,19 @@ int	death_check(t_table *table)
 	int	i;
 	int	death_control;
 
-	pthread_mutex_lock(&table->death_check_mutex);
-	death_control = table->death_num;
-	pthread_mutex_unlock(&table->death_check_mutex);
+
 	while (table->death_num == 0)
 	{
 		i = -1;
 		while (++i < table->philo_num)
 		{
-			pthread_mutex_lock(&table->time_mutex);
 			if (now_time() - table->philos[i].last_meal_time \
 				> table->philos[i].death_time)
 			{
 				death_write(&table->philos[i]);
 				return (0);
 			}
-			pthread_mutex_unlock(&table->time_mutex);
 		}
-		pthread_mutex_lock(&table->death_check_mutex);
-		death_control = table->death_num;
-		pthread_mutex_unlock(&table->death_check_mutex);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: zarslan <zarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 01:29:03 by zarslan           #+#    #+#             */
-/*   Updated: 2022/09/21 17:39:51 by zarslan          ###   ########.fr       */
+/*   Updated: 2022/09/22 15:23:47 by zarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,19 @@
 
 int	my_atoi(char *str)
 {
-	int	i;
-	int	num;
+	long	result;
 
-	i = 0;
-	num = 0;
-	while (str[i] <= 32)
-		i++;
-	if (str[i] == '-')
+	result = 0;
+	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
+		str++;
+	if (*str == '-')
 		return (-1);
-	if (str[i] >= '0' && str[i] <= '9')
+	while (*str != '\0' && (*str >= '0' && *str <= '9'))
 	{
-		while (str[i])
-		{
-			num += str[i] - 48;
-			if (str[i + 1])
-				num *= 10;
-			i++;
-		}
+		result = (result * 10) + (*str - 48);
+		str++;
 	}
-	else
-		return (-1);
-	return (num);
+	return (result);
 }
 
 unsigned long long	now_time(void)

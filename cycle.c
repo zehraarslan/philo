@@ -6,13 +6,13 @@
 /*   By: zarslan <zarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 16:15:49 by zarslan           #+#    #+#             */
-/*   Updated: 2022/09/21 17:54:57 by zarslan          ###   ########.fr       */
+/*   Updated: 2022/09/22 14:56:24 by zarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	eat_cycle(t_philo *philo)
+int	eat_cycle(t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_fork);
 	write_case("philo has taken a fork", philo);
@@ -31,6 +31,7 @@ void	eat_cycle(t_philo *philo)
 	write_case("philo is sleeping", philo);
 	my_usleep(philo->sleep_time);
 	write_case("philo is thinking", philo);
+	return (0);
 }
 
 void	lifecycle2(t_philo *philo)

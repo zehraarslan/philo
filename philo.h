@@ -6,7 +6,7 @@
 /*   By: zarslan <zarslan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:29:34 by zarslan           #+#    #+#             */
-/*   Updated: 2022/09/21 17:40:00 by zarslan          ###   ########.fr       */
+/*   Updated: 2022/09/22 15:07:37 by zarslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,20 @@ typedef struct s_table
 	t_philo				philos[200];
 }	t_table;
 
-int					my_atoi(char *str);
+void				destroy(t_table *table);
+int					error_message(char *message);
+void				mutex_init(t_table *table);
+int					check_arg(int argc, char **argv, t_table *table);
 unsigned long long	now_time(void);
 void				my_usleep(int ms);
-int					error_message(char *message);
+int					my_atoi(char *str);
+void				write_case(char *message, t_philo *philo);
 t_philo				edit_philos(int i, t_table *table);
 void				create_philos(t_table	*table);
 int					create_thread(t_table *table);
-int					death_check(t_table *table);
 void				*lifecycle(void *tmp);
-void				eat_cycle(t_philo *philo);
-int					check_arg(int argc, char **argv, t_table *table);
-void				write_case(char *message, t_philo *philo);
+void				lifecycle2(t_philo *philo);
+int					eat_cycle(t_philo *philo);
+void				death_write(t_philo *philo);
+int					death_check(t_table *table);
 #endif
